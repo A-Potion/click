@@ -1,3 +1,3 @@
-# Welcome to your Expo app 👋
+# Click
 
-Click! It's a mobile app for trainers and trainees.
+It's a mobile app for trainers and trainees.
