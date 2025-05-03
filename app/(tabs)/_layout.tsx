@@ -11,6 +11,7 @@ export default function TabLayout() {
             <Tabs.Screen name="index"
             options={{
                 title: 'Learn',
+                headerShown: false,
                 tabBarIcon: ({ color, focused }) => (
                     <Ionicons name={focused ? 'school-sharp' : 'school-outline'} color={color} size={24} />
                 ),
@@ -18,6 +19,7 @@ export default function TabLayout() {
             <Tabs.Screen name="todo"
             options={{
                 title: 'To-do',
+                headerShown: false,
                 tabBarIcon: ({ color, focused }) => (
                     <Ionicons name={focused ? 'list-sharp' : 'list-outline'} color={color} size={24} />
                 ),

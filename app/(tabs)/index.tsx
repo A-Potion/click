@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import LearnTile from "@/components/LearnTile"
+
 export default function Index() {
     return(
         <View style={styles.container}>
             <Text style={styles.text}>
                 Hello, world!
             </Text>
+            <LearnTile></LearnTile>
         </View>
     )
 }
