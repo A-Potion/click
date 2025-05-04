@@ -1,10 +1,18 @@
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function TopBar() {
+type Props = {
+    preBold: string;
+    bold: string;
+    postBold: string;
+}
+
+export default function TopBar({ preBold, bold, postBold }: Props ) {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>
-                Let's learn, <Text style={[styles.text, { fontWeight: "bold" }]}>Joe</Text>.
+            <Text style={styles.text}
+            selectable={true}
+            >
+                {preBold} <Text style={[styles.text, { fontWeight: "bold" }]}>{bold}</Text>{postBold}
             </Text>
         </View>
     )

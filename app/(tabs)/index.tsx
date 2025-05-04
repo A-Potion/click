@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, Platform } from 'react-native';
 
 import LearnTile from "@/components/LearnTile"
 import TopBar from "@/components/TopBar"
 
 export default function Index() {
     return(
-        <View style={styles.container}>
-            <TopBar></TopBar>
+        <SafeAreaView style={styles.container}>
+            <TopBar
+                preBold={"Let's learn"}
+                bold={'Joe'}
+                postBold={'.'}
+            />
             <LearnTile
             id={0}
             title={"Sit & Stay: Foundation Commands"}
@@ -32,7 +36,7 @@ export default function Index() {
         title={"Leave It & Drop It: Impulse Control for Safety"}
         description={'Teaching "leave it" and "drop it" helps prevent your dog from grabbing dangerous items or refusing to let go of something. Start with treats or toys during calm play, and reward compliance generously. Practice regularly in low-stress situations before trying it in real-world scenarios. These commands can be lifesaving, especially on walks or in new environments. Keep training fun and consistent to build a strong response.'}
         />
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -43,6 +47,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: '1%',
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     text: {
         alignContent: 'center',
