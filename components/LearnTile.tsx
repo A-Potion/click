@@ -1,26 +1,43 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { useRouter } from 'expo-router'
 
-export default function LearnTile() {
+type Props = {
+    title: string;
+    description: string;
+    id: number;
+}
+
+export default function LearnTile({ title, description, id }: Props) {
+    const router = useRouter();
+
     return (
-    <View style={styles.container}>
+    <Pressable
+    
+    style={styles.container}
+    onPress={() => {
+        router.navigate('/lesson')
+        }}
+    >
         <View style={styles.titleContainer}>
             <Text
+            ellipsizeMode='tail'
+            numberOfLines={1}
             style={styles.title}
-            selectable={true}
             >
-                Hello there!
+               {title}
             </Text>
         </View>
         <View style={styles.descriptionContainer}>
             <Text
-                ellipsizeMode='head'
+                ellipsizeMode='tail'
+                numberOfLines={2}
                 style={styles.description}
-                selectable={true}
             >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {description}
             </Text>
         </View>
-    </View>
+        
+    </Pressable>
     
     )
 }
@@ -28,31 +45,25 @@ export default function LearnTile() {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
+        width: '96%',
+        borderRadius: 8,
         flexDirection: 'column',
-        alignItems: 'center',
-        width: '80%',
-        height: '12%',
     },
     titleContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        alignSelf: 'flex-start',
+        left: 8,
+        top: 4,
+        maxWidth: '90%',
     },
     title: {
-        position: 'relative',
-        fontSize: 22,
+        fontSize: 26,
         fontWeight: 'bold',
-        left: 22,
-        top: 4,
+        overflow: 'hidden',
     },
     descriptionContainer: {
-        flex: 5,
-        flexShrink: 1,
-        alignSelf: 'flex-end',
-        alignContent: 'flex-start',
         padding: 6,
+        flexShrink: 1,
     },
     description: {
-        fontSize: 16,
+        fontSize: 20,
     },
 })
