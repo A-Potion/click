@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { useRouter } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 
 type Props = {
     title: string;
@@ -11,13 +11,12 @@ export default function LearnTile({ title, description, id }: Props) {
     const router = useRouter();
 
     return (
-    <Pressable
-    
-    style={styles.container}
-    onPress={() => {
-        router.navigate('/lesson')
-        }}
-    >
+    <Link href={{
+        pathname: "/lesson/[id]",
+        params: { id: id },
+        }} asChild>
+    <Pressable>
+    <View style={styles.container}>
         <View style={styles.titleContainer}>
             <Text
             ellipsizeMode='tail'
@@ -36,8 +35,9 @@ export default function LearnTile({ title, description, id }: Props) {
                 {description}
             </Text>
         </View>
-        
+    </View>
     </Pressable>
+    </Link>
     
     )
 }
