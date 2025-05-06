@@ -37,13 +37,16 @@ export default function VideoPlayer() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 10,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
+        backgroundColor: '#fff',
+        borderRadius: 8,
+        width: '96%',
     },
     video: {
-        width: 480,
-        height: 270,
+        alignSelf: 'center',
+        aspectRatio: 16 / 9,
+        width: '100%',
     }
 })

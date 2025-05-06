@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         width: '96%',
         borderRadius: 8,
         flexDirection: 'column',
+        alignSelf: 'center',
     },
     titleContainer: {
         left: 8,

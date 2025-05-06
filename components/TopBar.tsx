@@ -10,7 +10,7 @@ export default function TopBar({ preBold, bold, postBold }: Props ) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}
-            selectable={true}
+            selectable={false}
             >
                 {preBold} <Text style={[styles.text, { fontWeight: "bold" }]}>{bold}</Text>{postBold}
             </Text>

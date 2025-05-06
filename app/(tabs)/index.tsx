@@ -1,11 +1,15 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, Platform } from 'react-native';
+import { StyleSheet, Text, ScrollView, SafeAreaView, StatusBar, Platform } from 'react-native';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import LearnTile from "@/components/LearnTile"
 import TopBar from "@/components/TopBar"
 
 export default function Index() {
+    const tabBarHeight = useBottomTabBarHeight();
+
     return(
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.scroll}>
+        <ScrollView showsVerticalScrollIndicator={Platform.OS === 'web' ? true : false} contentContainerStyle={[styles.container, { paddingBottom: tabBarHeight }]}>
             <TopBar
                 preBold={"Let's learn"}
                 bold={'Joe'}
@@ -36,17 +40,16 @@ export default function Index() {
         title={"Leave It & Drop It: Impulse Control for Safety"}
         description={'Teaching "leave it" and "drop it" helps prevent your dog from grabbing dangerous items or refusing to let go of something. Start with treats or toys during calm play, and reward compliance generously. Practice regularly in low-stress situations before trying it in real-world scenarios. These commands can be lifesaving, especially on walks or in new environments. Keep training fun and consistent to build a strong response.'}
         />
+        </ScrollView>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#4287f5',
-        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: '1%',
+        gap: '8',
+        justifyContent: 'space-between',
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     },
     text: {
@@ -55,4 +58,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    scroll: {
+        flex: 1,
+        backgroundColor: '#4287f5',
+    }
 })
