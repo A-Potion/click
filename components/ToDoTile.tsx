@@ -2,17 +2,22 @@ import { Text, View, StyleSheet } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useState } from 'react';
 
-import Swiper from 'react-native-swiper';
+import { SwipeListView } from 'react-native-swipe-list-view';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { JumpingTransition } from 'react-native-reanimated';
 
-export default function ToDoTile() {
-    const [isChecked, setIsChecked ] = useState(false);
 
+export default function ToDoTile() {
+    const listViewData = Array(20)
+    .fill("")
+    .map((_, i) => ({ key: `${i}`, text: `item #${i}` }));
+    
     return(
-        <View style={styles.centralContainer} >
-            <Swiper autoplay={false} loop={false} style={styles.swiper} showsButtons={false}>
+        <SwipeListView
+        style={styles.slv}
+        data={listViewData}
+        renderItem={ (data, rowMap) =>
             <View style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.title}>
@@ -33,20 +38,27 @@ export default function ToDoTile() {
             </View>
             </View>
             </View>
+        }
+        renderHiddenItem={ ( data, rowMap ) =>
             <View style={styles.doneStyle}>
-                <Text>
-                    Meow
-                </Text>
+            <Ionicons name='checkmark-outline' size={70} />
             </View>
-            </Swiper>
-        </View>
+            
+        }
+        rightOpenValue={-75}
+        disableRightSwipe={true}
+        stopRightSwipe={-110}
+        ItemSeparatorComponent={() => <View style={{height: 6}} />}
+        showsVerticalScrollIndicator={false}
+>
+           
+            </SwipeListView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        width: '96%',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 8,
@@ -86,15 +98,16 @@ const styles = StyleSheet.create({
     }, 
     doneStyle: {
         backgroundColor: '#21d1a5',
-        width: '96%',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
-        borderRadius: 0,
         paddingLeft: 0,
         paddingBottom: 6,
         paddingTop: 6,
+        borderRadius: 8,
+        flex: 1,
     },
-    centralContainer: {
-
+    slv: {
+        flex: 1,
+        width: '96%',
     }
 })

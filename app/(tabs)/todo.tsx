@@ -1,16 +1,16 @@
-import { StyleSheet, Text, Platform, StatusBar, ScrollView, SafeAreaView } from 'react-native'
+import { StyleSheet, Text, Platform, StatusBar, ScrollView, SafeAreaView, View } from 'react-native'
 
 import ToDoTile from '@/components/ToDoTile';
 
 export default function ToDo() {
     return (
     <SafeAreaView style={styles.scroll}>
-        <ScrollView showsVerticalScrollIndicator={Platform.OS === 'web' ? true : false} contentContainerStyle={styles.container}>
+        <View style={styles.container}>
         <Text>
             Hello world
         </Text>
         <ToDoTile />
-        </ScrollView>
+        </View>
     </SafeAreaView>
     )
 }
