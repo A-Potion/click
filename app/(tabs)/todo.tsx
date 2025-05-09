@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: '1%',
+        flex: 1,
     },
     scroll: {
         flex: 1,
