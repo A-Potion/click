@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Animated } from 'react-native';
+import { Text, View, StyleSheet, Animated, TouchableOpacity, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { useState } from 'react';
 
@@ -12,10 +12,27 @@ export default function ToDoTile() {
 const [listData, setListData] = useState(
         Array(20)
             .fill('')
-            .map((_, i) => ({ key: `${i}`, text: `item #${i}` }))
+            .map((_, i) => ({ key: `${i}`, text: `item #${i}`, descriptionShown: false }))
     );
 
+    const onSwipeValueChange = (swipeData) => {
+                const { key, value } = swipeData;
+                if (value < -39) {
+                    const newData = listData.filter(item => item.key !== key);
+                    setListData(newData);
+                }
+            }
     
+    const handleDescriptionChange = (key: string) =>  {
+        const tempItems = listData.map(item =>
+            item.key === key
+                ? { ...item, descriptionShown: !item.descriptionShown }
+                : item
+        );
+        setListData(tempItems); 
+        alert(tempItems.find(item => item.key === key)?.descriptionShown);
+    }
+
     return(
         <SwipeListView
             style={styles.slv}
@@ -23,6 +40,9 @@ const [listData, setListData] = useState(
             keyExtractor={data => data.key}
             renderItem={(data) =>
                 <View style={styles.container}>
+                    <Pressable
+                    onPress={() => handleDescriptionChange(data.item.key)}
+                    >
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>
                             Lorem ipsum dolor sit amet. {data.item.key}
@@ -41,6 +61,7 @@ const [listData, setListData] = useState(
                             </Text>
                         </View>
                     </View>
+                    </Pressable>
                 </View>
             }
             renderHiddenItem={(data, rowMap) =>
@@ -49,18 +70,14 @@ const [listData, setListData] = useState(
                 </View>
             }
             disableRightSwipe={true}
-            stopRightSwipe={-110}
+            stopRightSwipe={-40}
+            swipeToOpenPercent={0.03}
             ItemSeparatorComponent={() => <View style={{ height: 6 }} />}
             showsVerticalScrollIndicator={false}
             rightActivationValue={-30}
-            rightOpenValue={-20}
-            onSwipeValueChange={(swipeData) => {
-                const { key, value } = swipeData;
-                if (value < -70) {
-                    const newData = listData.filter(item => item.key !== key);
-                    setListData(newData);
-                }
-            }}
+            rightOpenValue={-40}
+            rightActionValue={-1}
+            onSwipeValueChange={onSwipeValueChange}
         />
     )
 }
